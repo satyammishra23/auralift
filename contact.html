@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Get in touch with the Auralift team for questions about orders, products, or support.">
+  <title>Contact Us | Auralift</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/toast.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { DEFAULT: '#DC2626', dark: '#B91C1C', light: '#FEF2F2' } },
+          fontFamily: { sans: ['Poppins', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/auralift.png" alt="Auralift logo" class="w-12 h-12">
+        <span class="text-3xl font-bold text-brand">Auralift</span>
+      </a>
+      <nav class="hidden md:flex gap-8 items-center text-gray-700 font-medium">
+        <a href="index.html" class="hover:text-brand">Home</a>
+        <a href="product.html" class="hover:text-brand">Products</a>
+        <a href="about.html" class="hover:text-brand">About</a>
+        <a href="contact.html" class="text-brand font-semibold">Contact</a>
+        <a href="account.html" class="hover:text-brand">Account</a>
+      </nav>
+      <button id="menuBtn" class="md:hidden text-2xl" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white px-6 pb-4 space-y-2 border-t">
+      <a href="index.html" class="block py-2">Home</a>
+      <a href="product.html" class="block py-2">Products</a>
+      <a href="about.html" class="block py-2">About</a>
+      <a href="contact.html" class="block py-2 text-brand font-semibold">Contact</a>
+      <a href="account.html" class="block py-2">Account</a>
+    </div>
+  </header>
+
+  <!-- Contact Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+
+        <!-- Contact Info -->
+        <div>
+          <h1 class="text-4xl font-bold mb-4 text-brand">Get in Touch</h1>
+          <p class="mb-6 text-gray-700 leading-relaxed text-lg">
+            Have any questions or need help choosing the right fitness products?
+            Our team is here to support your fitness journey. Reach out today!
+          </p>
+
+          <div class="space-y-4 text-gray-700 text-lg">
+            <p><strong>📍 Address:</strong> Civil Lines, Prayagraj, India</p>
+            <p><strong>📞 Phone:</strong> +91 70843 57243</p>
+            <p><strong>📧 Email:</strong> mishrasatyam1956@gmail.com</p>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="bg-white shadow-xl rounded-2xl p-8">
+          <h2 class="text-2xl font-semibold mb-6">Send Us a Message</h2>
+
+          <form action="thankyou.html" method="get" class="space-y-5">
+
+            <div>
+              <label for="fullName" class="block mb-2 text-sm font-medium text-gray-700">Full Name</label>
+              <input id="fullName" name="fullName" type="text" placeholder="Enter your name" required
+                class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-brand focus:outline-none">
+            </div>
+
+            <div>
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
+              <input id="email" name="email" type="email" placeholder="Enter your email" required
+                class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-brand focus:outline-none">
+            </div>
+
+            <div>
+              <label for="message" class="block mb-2 text-sm font-medium text-gray-700">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required
+                class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-brand focus:outline-none"></textarea>
+            </div>
+
+            <button type="submit"
+              class="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg w-full transition duration-300">
+              Send Message
+            </button>
+            <p class="text-xs text-gray-400 text-center">Let's get in touch.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 py-12">
+    <div class="container mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 px-6">
+      <div>
+        <h3 class="text-white font-semibold mb-3">Download Our App</h3>
+        <p>Available on Android and iOS.</p>
+        <div class="flex space-x-4 mt-4">
+          <span class="bg-gray-800 px-4 py-2 rounded-lg">Play Store</span>
+          <span class="bg-gray-800 px-4 py-2 rounded-lg">App Store</span>
+        </div>
+      </div>
+      <div class="text-center">
+        <img src="images/auralift.png" alt="Auralift logo" class="mx-auto w-16 mb-3">
+        <p>Making fitness and sports gear accessible to everyone at affordable prices.</p>
+      </div>
+      <div class="text-center">
+        <h3 class="text-white font-semibold mb-3">Useful Links</h3>
+        <ul class="space-y-1">
+          <li><a href="index.html" class="hover:text-red-500">Home</a></li>
+          <li><a href="about.html" class="hover:text-red-500">About</a></li>
+          <li><a href="product.html" class="hover:text-red-500">Products</a></li>
+          <li><a href="contact.html" class="hover:text-red-500">Contact</a></li>
+          <li><a href="account.html" class="hover:text-red-500">Account</a></li>
+        </ul>
+      </div>
+      <div class="text-center">
+        <h3 class="text-white font-semibold mb-3">Follow Us</h3>
+        <ul class="space-y-1">
+          <li><a href="#" class="hover:text-red-500">Facebook</a></li>
+          <li><a href="#" class="hover:text-red-500">Instagram</a></li>
+          <li><a href="#" class="hover:text-red-500">Twitter</a></li>
+          <li><a href="#" class="hover:text-red-500">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-gray-800 my-6">
+    <p class="text-center text-gray-500">© 2025 Auralift - All Rights Reserved</p>
+    <p class="text-center text-gray-500">Designed by Satyam Mishra & Team 💗</p>
+  </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>

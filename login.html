@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--
+    NOTE: This project originally had two separate login systems —
+    this page (cosmetic only, didn't actually save/check users) and
+    account.html (a working demo login using localStorage).
+    To avoid confusing users with two different "logins", this page
+    now redirects to the one that actually works: account.html.
+  -->
+  <meta http-equiv="refresh" content="0; url=account.html">
+  <link rel="canonical" href="account.html">
+  <title>Redirecting to Account | Auralift</title>
+  <script>window.location.replace('account.html');</script>
+</head>
+<body class="bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen font-sans">
+  <p>Redirecting to <a href="account.html" class="text-red-600 underline">your account page</a>…</p>
+</body>
+</html>

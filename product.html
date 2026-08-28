@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse Auralift's full range of gym wear, sports equipment and nutrition products.">
+  <title>Products | Auralift</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/toast.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { DEFAULT: '#DC2626', dark: '#B91C1C', light: '#FEF2F2' } },
+          fontFamily: { sans: ['Poppins', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+  // ---- AUTH GUARD ----
+  // Runs before the page paints. If nobody is logged in, bounce straight
+  // to account.html so the store can never be browsed/shopped without login.
+  requireLogin();
+</script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/auralift.png" alt="Auralift logo" class="w-12 h-12">
+        <span class="text-3xl font-bold text-brand">Auralift</span>
+      </a>
+      <nav class="hidden md:flex gap-8 items-center text-gray-700 font-medium">
+        <a href="index.html" class="hover:text-brand">Home</a>
+        <a href="product.html" class="text-brand font-semibold">Products</a>
+        <a href="about.html" class="hover:text-brand">About</a>
+        <a href="contact.html" class="hover:text-brand">Contact</a>
+        <a href="account.html" class="hover:text-brand">Account</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <span id="userChip" class="hidden text-sm text-gray-600"></span>
+        <button id="cartBtn" class="relative p-2 hover:text-brand" aria-label="Open cart">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 1.918-4.7 2.478-7.078a1.125 1.125 0 00-1.087-1.372H5.106M7.5 14.25L5.106 5.25M7.5 14.25L6.75 12M9.75 20.25a.75.75 0 100-1.5.75.75 0 000 1.5zM18 20.25a.75.75 0 100-1.5.75.75 0 000 1.5z" />
+          </svg>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-brand text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </button>
+        <button id="menuBtn" class="md:hidden text-2xl" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white px-6 pb-4 space-y-2 border-t">
+      <a href="index.html" class="block py-2">Home</a>
+      <a href="product.html" class="block py-2 text-brand font-semibold">Products</a>
+      <a href="about.html" class="block py-2">About</a>
+      <a href="contact.html" class="block py-2">Contact</a>
+      <a href="account.html" class="block py-2">Account</a>
+    </div>
+  </header>
+
+  <!-- Filter Bar -->
+  <section class="container mx-auto px-6 mt-8">
+    <h1 class="text-2xl font-semibold mb-6">All Fitness Products</h1>
+
+    <div class="bg-white rounded-xl shadow-sm p-4 mb-8 space-y-4">
+      <!-- Category pills -->
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+        <button type="button" class="filterBtn active-filter px-4 py-2 rounded-full text-sm font-semibold border transition" data-category="all">All</button>
+        <button type="button" class="filterBtn px-4 py-2 rounded-full text-sm font-semibold border transition" data-category="gymwear">Gym Wear</button>
+        <button type="button" class="filterBtn px-4 py-2 rounded-full text-sm font-semibold border transition" data-category="equipment">Sports Equipment</button>
+        <button type="button" class="filterBtn px-4 py-2 rounded-full text-sm font-semibold border transition" data-category="nutrition">Nutrition / Protein</button>
+      </div>
+
+      <!-- Search + Sort -->
+      <div class="flex flex-col sm:flex-row gap-3">
+        <div class="relative flex-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" />
+          </svg>
+          <input id="searchInput" type="search" placeholder="Search products..." class="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2.5 focus:ring-2 focus:ring-brand focus:outline-none">
+        </div>
+        <select id="sortSelect" class="border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-brand focus:outline-none">
+          <option value="default">Sort: Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name-asc">Name: A–Z</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div id="productList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-16">
+
+      <!-- Gym Wear -->
+      <div data-category="gymwear" data-name="Muscle Fit Gym T-shirt" data-price="35.00" class="product-card bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
+        <div class="h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+          <img src="images/gallery-3.jpg" alt="Muscle fit gym t-shirt, black" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-lg font-semibold">Muscle Fit Gym T-shirt</h3>
+        <p class="text-brand font-bold mt-1">$35.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Muscle+Fit+Gym+T-shirt&price=35.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div data-category="gymwear" data-name="Gym Tank Top" data-price="30.00" class="product-card bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
+        <div class="h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+          <img src="images/gallery-1.jpg" alt="Muscle fit gym t-shirt, red" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-lg font-semibold">Gym Tank Top</h3>
+        <p class="text-brand font-bold mt-1">$30.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Gym+Tank+Top&price=30.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div data-category="gymwear" data-name="Compression Leggings" data-price="40.00" class="product-card bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
+        <div class="h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+          <img src="images/gallery-2.jpg" alt="Compression leggings, grey" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-lg font-semibold">Compression Leggings</h3>
+        <p class="text-brand font-bold mt-1">$40.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Compression+Leggings&price=40.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div data-category="gymwear" data-name="Workout Gloves" data-price="25.00" class="product-card bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
+        <div class="h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+          <img src="images/gloves.jpg" alt="Padded workout gloves" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-lg font-semibold">Workout Gloves</h3>
+        <p class="text-brand font-bold mt-1">$25.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Workout+Gloves&price=25.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div data-category="gymwear" data-name="Everyday Training Hoodie" data-price="42.00" class="product-card bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
+        <div class="h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+          <img src="images/gymwear.jpg" alt="Training hoodie" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-lg font-semibold">Everyday Training Hoodie</h3>
+        <p class="text-brand font-bold mt-1">$42.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Everyday+Training+Hoodie&price=42.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Sports Equipment -->
+      <div data-category="equipment" data-name="Adjustable Dumbbells Set" data-price="120.00" class="product-card bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
+        <div class="h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+          <img src="images/dumble.jpg" alt="Adjustable dumbbells set" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-lg font-semibold">Adjustable Dumbbells Set</h3>
+        <p class="text-brand font-bold mt-1">$120.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Adjustable+Dumbbells+Set&price=120.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div data-category="equipment" data-name="Resistance Bands Set" data-price="45.00" class="product-card bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
+        <div class="h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+          <img src="images/band.png" alt="Resistance bands set" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-lg font-semibold">Resistance Bands Set</h3>
+        <p class="text-brand font-bold mt-1">$45.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Resistance+Bands+Set&price=45.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div data-category="equipment" data-name="Speed Skipping Rope" data-price="15.00" class="product-card bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
+        <div class="h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+          <img src="images/sports2.png" alt="Speed skipping rope" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-lg font-semibold">Speed Skipping Rope</h3>
+        <p class="text-brand font-bold mt-1">$15.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Speed+Skipping+Rope&price=15.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Nutrition -->
+      <div data-category="nutrition" data-name="Whey Protein 1kg" data-price="55.00" class="product-card bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
+        <div class="h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+          <img src="images/protein.png" alt="Whey protein powder, 1kg" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-lg font-semibold">Whey Protein 1kg</h3>
+        <p class="text-brand font-bold mt-1">$55.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Whey+Protein+1kg&price=55.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div data-category="nutrition" data-name="BCAA Supplement" data-price="32.00" class="product-card bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
+        <div class="h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+          <img src="images/protein.png" alt="BCAA supplement powder" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-lg font-semibold">BCAA Supplement</h3>
+        <p class="text-brand font-bold mt-1">$32.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=BCAA+Supplement&price=32.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+
+    <p id="emptyState" class="hidden text-center text-gray-500 pb-16">No products found. Try a different search or category.</p>
+  </section>
+
+  <!-- Cart Drawer -->
+  <div id="cartOverlay" class="fixed inset-0 bg-black/50 hidden z-[60]"></div>
+  <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl translate-x-full transition-transform duration-300 z-[70] flex flex-col">
+    <div class="flex justify-between items-center p-4 border-b">
+      <h2 class="text-lg font-semibold">Your Cart</h2>
+      <button id="closeCart" class="text-2xl leading-none" aria-label="Close cart">&times;</button>
+    </div>
+    <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <p class="text-gray-500 text-sm">Your cart is empty.</p>
+    </div>
+    <div class="p-4 border-t">
+      <div class="flex justify-between font-semibold mb-3 text-lg">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button id="checkoutBtn" class="w-full bg-brand text-white py-3 rounded-lg font-semibold hover:bg-brand-dark transition">Checkout</button>
+      <p class="text-xs text-gray-400 text-center mt-2">Order is saved to your account's Purchase History — no real payment gateway yet.</p>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 py-12">
+    <div class="container mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 px-6">
+      <div>
+        <h3 class="text-white font-semibold mb-3">Download Our App</h3>
+        <p class="text-sm mb-3">Available on Android and iOS</p>
+        <div class="flex space-x-3">
+          <span class="bg-gray-700 px-3 py-2 rounded">Play Store</span>
+          <span class="bg-gray-700 px-3 py-2 rounded">App Store</span>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-3">About Auralift</h3>
+        <p class="text-sm">Making fitness gear accessible for everyone at affordable prices.</p>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-3">Useful Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="hover:text-red-500">Home</a></li>
+          <li><a href="about.html" class="hover:text-red-500">About</a></li>
+          <li><a href="product.html" class="hover:text-red-500">Products</a></li>
+          <li><a href="contact.html" class="hover:text-red-500">Contact</a></li>
+          <li><a href="account.html" class="hover:text-red-500">Account</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-3">Follow Us</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-red-500">Instagram</a></li>
+          <li><a href="#" class="hover:text-red-500">Facebook</a></li>
+          <li><a href="#" class="hover:text-red-500">YouTube</a></li>
+          <li><a href="#" class="hover:text-red-500">Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center text-gray-500 text-sm py-4 border-t border-gray-800">
+      <p>© 2025 Auralift - All Rights Reserved</p>
+      <p>Designed by Satyam Mishra & Team 💗</p>
+    </div>
+  </footer>
+
+  <style>
+    .filterBtn { border-color: #e5e7eb; color: #4b5563; background: #fff; }
+    .filterBtn:hover { border-color: #DC2626; color: #DC2626; }
+    .filterBtn.active-filter { background: #DC2626; border-color: #DC2626; color: #fff; }
+  </style>
+
+ <script>
+  // Mobile menu
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  });
+
+  // ---------- FILTER + SEARCH + SORT (specific to this page) ----------
+  const filterBtns = document.querySelectorAll('.filterBtn');
+  const searchInput = document.getElementById('searchInput');
+  const sortSelect = document.getElementById('sortSelect');
+  const productList = document.getElementById('productList');
+  const products = Array.from(document.querySelectorAll('.product-card'));
+  const emptyState = document.getElementById('emptyState');
+
+  let activeCategory = 'all';
+
+  function applyFilters() {
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    products.forEach(card => {
+      const matchesCategory = activeCategory === 'all' || card.dataset.category === activeCategory;
+      const matchesSearch = card.dataset.name.toLowerCase().includes(query);
+      const show = matchesCategory && matchesSearch;
+      card.classList.toggle('hidden', !show);
+      if (show) visibleCount++;
+    });
+
+    emptyState.classList.toggle('hidden', visibleCount !== 0);
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active-filter'));
+      btn.classList.add('active-filter');
+      activeCategory = btn.dataset.category;
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', applyFilters);
+
+  sortSelect.addEventListener('change', () => {
+    const value = sortSelect.value;
+    const sorted = [...products];
+
+    if (value === 'price-asc') {
+      sorted.sort((a, b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price));
+    } else if (value === 'price-desc') {
+      sorted.sort((a, b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price));
+    } else if (value === 'name-asc') {
+      sorted.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+    }
+
+    sorted.forEach(card => productList.appendChild(card));
+  });
+</script>
+
+</body>
+</html>
+   
+
+</body>
+</html>

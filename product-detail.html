@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Product details on Auralift.">
+  <title>Product Details | Auralift</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { DEFAULT: '#DC2626', dark: '#B91C1C', light: '#FEF2F2' } },
+          fontFamily: { sans: ['Poppins', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/auralift.png" alt="Auralift logo" class="w-12 h-12">
+        <span class="text-3xl font-bold text-brand">Auralift</span>
+      </a>
+      <nav class="hidden md:flex gap-8 items-center text-gray-700 font-medium">
+        <a href="index.html" class="hover:text-brand">Home</a>
+        <a href="product.html" class="text-brand font-semibold">Products</a>
+        <a href="about.html" class="hover:text-brand">About</a>
+        <a href="contact.html" class="hover:text-brand">Contact</a>
+        <a href="account.html" class="hover:text-brand">Account</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <span id="userChip" class="hidden text-sm text-gray-600"></span>
+        <button id="menuBtn" class="md:hidden text-2xl" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white px-6 pb-4 space-y-2 border-t">
+      <a href="index.html" class="block py-2">Home</a>
+      <a href="product.html" class="block py-2 text-brand font-semibold">Products</a>
+      <a href="about.html" class="block py-2">About</a>
+      <a href="contact.html" class="block py-2">Contact</a>
+      <a href="account.html" class="block py-2">Account</a>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-6 pt-6 text-sm text-gray-500">
+    <a href="index.html" class="hover:text-brand">Home</a> /
+    <a href="product.html" class="hover:text-brand">Products</a> /
+    <span id="crumbName" class="text-gray-700">Product</span>
+  </div>
+
+  <!-- Product Detail -->
+  <section class="container mx-auto px-6 py-10">
+    <div class="grid md:grid-cols-2 gap-10 bg-white rounded-2xl shadow-lg p-8">
+
+        <div class="h-80 md:h-96 bg-gray-100 rounded-xl overflow-hidden">
+        <img id="productImage" src="" alt="" class="w-full h-full object-cover">
+      </div>
+
+      <div>
+        <h1 id="productName" class="text-3xl font-bold text-gray-900 mb-2">Product Name</h1>
+        <p id="productPrice" class="text-2xl font-semibold text-brand mb-4">$0.00</p>
+        <p class="text-gray-600 leading-relaxed mb-6">
+          Built for durability, comfort, and performance — this product is part of Auralift's
+          curated fitness range. Full specifications and reviews will appear here once the product
+          catalog is connected to a backend.
+        </p>
+
+        <div class="flex items-center gap-4 mb-6">
+          <label for="qty" class="text-sm font-medium">Quantity</label>
+          <input id="qty" type="number" min="1" value="1" class="w-20 border border-gray-300 rounded-md px-3 py-2">
+        </div>
+
+        <div class="flex flex-wrap gap-4">
+          <button id="addToCartBtn" class="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition">
+            Add to Cart
+          </button>
+          <a href="product.html" class="border border-gray-300 hover:border-brand hover:text-brand px-6 py-3 rounded-lg transition font-semibold">
+            ← Back to Products
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Cart Drawer (needed here too, since this page can also add to cart) -->
+  <div id="cartOverlay" class="fixed inset-0 bg-black/50 hidden z-[60]"></div>
+  <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl translate-x-full transition-transform duration-300 z-[70] flex flex-col">
+    <div class="flex justify-between items-center p-4 border-b">
+      <h2 class="text-lg font-semibold">Your Cart</h2>
+      <button id="closeCart" class="text-2xl leading-none" aria-label="Close cart">&times;</button>
+    </div>
+    <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <p class="text-gray-500 text-sm">Your cart is empty.</p>
+    </div>
+    <div class="p-4 border-t">
+      <div class="flex justify-between font-semibold mb-3 text-lg">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button id="checkoutBtn" class="w-full bg-brand text-white py-3 rounded-lg font-semibold hover:bg-brand-dark transition">Checkout</button>
+      <p class="text-xs text-gray-400 text-center mt-2">Order is saved to your account's Purchase History — no real payment gateway yet.</p>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 py-12">
+    <div class="container mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 px-6">
+      <div>
+        <h3 class="text-white font-semibold mb-3">Download Our App</h3>
+        <p class="text-sm">Available on Android and iOS.</p>
+      </div>
+      <div class="text-center">
+        <img src="images/auralift.png" alt="Auralift logo" class="mx-auto w-16 mb-3">
+        <p class="text-sm">Making fitness and sports gear accessible to everyone at affordable prices.</p>
+      </div>
+      <div class="text-center">
+        <h3 class="text-white font-semibold mb-3">Useful Links</h3>
+        <ul class="space-y-1 text-sm">
+          <li><a href="index.html" class="hover:text-red-500">Home</a></li>
+          <li><a href="product.html" class="hover:text-red-500">Products</a></li>
+          <li><a href="about.html" class="hover:text-red-500">About</a></li>
+          <li><a href="contact.html" class="hover:text-red-500">Contact</a></li>
+          <li><a href="account.html" class="hover:text-red-500">Account</a></li>
+        </ul>
+      </div>
+      <div class="text-center">
+        <h3 class="text-white font-semibold mb-3">Follow Us</h3>
+        <ul class="space-y-1 text-sm">
+          <li><a href="#" class="hover:text-red-500">Instagram</a></li>
+          <li><a href="#" class="hover:text-red-500">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-gray-800 my-6">
+    <p class="text-center text-gray-500">© 2025 Auralift - All Rights Reserved</p>
+    <p class="text-center text-gray-500">Designed by Satyam Mishra & Team 💗</p>
+  </footer>
+
+    <script>
+    // Maps each product name to its image path — keeps this page in sync
+    // with the images already used on index.html / product.html without
+    // needing to change every "View Details" link.
+    const productImages = {
+      "Adjustable Dumbbells Set": "images/dumble.jpg",
+      "Resistance Bands": "images/band.png",
+      "Resistance Bands Set": "images/band.png",
+      "Workout Gloves": "images/gloves.jpg",
+      "Muscle Fit Gym T-shirt": "images/gallery-3.jpg",
+      "Gym Tank Top": "images/gallery-1.jpg",
+      "Compression Leggings": "images/gallery-2.jpg",
+      "Everyday Training Hoodie": "images/gymwear.jpg",
+      "Whey Protein 1kg": "images/protein.png",
+      "BCAA Supplement": "images/protein.png",
+      "Speed Skipping Rope": "images/sports2.png"
+    };
+
+    // Mobile menu
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+    // Read product name/price from the URL
+    const params = new URLSearchParams(window.location.search);
+    const productNameFromUrl = params.get('item') || 'Product';
+    const productPriceFromUrl = params.get('price') || '0.00';
+
+    document.getElementById('productName').textContent = productNameFromUrl;
+    document.getElementById('productPrice').textContent = '$' + productPriceFromUrl;
+    document.getElementById('crumbName').textContent = productNameFromUrl;
+    document.title = productNameFromUrl + ' | Auralift';
+
+    // Set the actual product image, with a safe fallback if the name isn't in the map
+    const imgEl = document.getElementById('productImage');
+    imgEl.src = productImages[productNameFromUrl] || 'images/auralift.png';
+    imgEl.alt = productNameFromUrl;
+
+    // Add to Cart on this page
+    document.getElementById('addToCartBtn').addEventListener('click', () => {
+      const qty = parseInt(document.getElementById('qty').value) || 1;
+      for (let i = 0; i < qty; i++) {
+        addToCart(productNameFromUrl, productPriceFromUrl);
+      }
+    });
+  </script>
+</body>
+</html>

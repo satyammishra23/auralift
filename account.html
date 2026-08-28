@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Log in or create an Auralift account to shop and track your orders.">
+  <title>Account | Auralift</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/toast.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { DEFAULT: '#DC2626', dark: '#B91C1C', light: '#FEF2F2' } },
+          fontFamily: { sans: ['Poppins', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans bg-gray-50 text-gray-900">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/auralift.png" alt="Auralift logo" class="w-12 h-12">
+        <span class="text-3xl font-bold text-brand">Auralift</span>
+      </a>
+      <nav class="hidden md:flex gap-8 items-center text-gray-700 font-medium">
+        <a href="index.html" class="hover:text-brand">Home</a>
+        <a href="product.html" class="hover:text-brand">Products</a>
+        <a href="about.html" class="hover:text-brand">About</a>
+        <a href="contact.html" class="hover:text-brand">Contact</a>
+        <a href="account.html" class="text-brand font-semibold">Account</a>
+      </nav>
+      <button id="menuBtn" class="md:hidden text-2xl" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white px-6 pb-4 space-y-2 border-t">
+      <a href="index.html" class="block py-2">Home</a>
+      <a href="product.html" class="block py-2">Products</a>
+      <a href="about.html" class="block py-2">About</a>
+      <a href="contact.html" class="block py-2">Contact</a>
+      <a href="account.html" class="block py-2 text-brand font-semibold">Account</a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container mx-auto px-6 py-12">
+
+    <!-- LOGGED OUT: Login / Signup card -->
+    <div id="authContainer" class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden grid md:grid-cols-2">
+      <div class="p-8 bg-gradient-to-b from-brand to-red-500 text-white">
+        <h1 class="text-3xl font-extrabold mb-3">Welcome to Auralift</h1>
+        <p class="mb-6">Log in to shop and track your orders. New here? Create an account — it's quick, and required before you can add anything to your cart.</p>
+        <p class="text-sm opacity-90">Auralift — Empowering your fitness journey.</p>
+      </div>
+
+      <div class="p-8">
+        <!-- LOGIN FORM -->
+        <form id="loginForm" class="space-y-4">
+          <h2 class="text-xl font-semibold mb-2">Login</h2>
+          <div>
+            <label for="loginEmail" class="block text-sm font-medium mb-1">Email</label>
+            <input id="loginEmail" name="loginEmail" type="email" class="w-full border rounded-md px-3 py-2" placeholder="you@example.com" required>
+          </div>
+          <div>
+            <label for="loginPassword" class="block text-sm font-medium mb-1">Password</label>
+            <input id="loginPassword" name="loginPassword" type="password" class="w-full border rounded-md px-3 py-2" placeholder="Enter password" required>
+          </div>
+          <div class="flex gap-3">
+            <button type="submit" class="bg-brand text-white px-4 py-2 rounded-md">Login</button>
+            <button id="toSignupFromLogin" type="button" class="bg-gray-100 px-4 py-2 rounded-md">Create account</button>
+          </div>
+          <p id="loginMsg" class="text-sm text-brand"></p>
+          <p class="text-xs text-gray-400">By signing up, you agree to our <a href="#" class="underline">Terms of Service</a> and <a href="#" class="underline">Privacy Policy</a>.</p>
+        </form>
+
+        <!-- SIGNUP FORM -->
+        <form id="signupForm" class="space-y-4 hidden">
+          <h2 class="text-xl font-semibold mb-2">Create Account</h2>
+          <div>
+            <label for="signupName" class="block text-sm font-medium mb-1">Full Name</label>
+            <input id="signupName" name="signupName" type="text" class="w-full border rounded-md px-3 py-2" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="signupEmail" class="block text-sm font-medium mb-1">Email</label>
+            <input id="signupEmail" name="signupEmail" type="email" class="w-full border rounded-md px-3 py-2" placeholder="you@example.com" required>
+          </div>
+          <div>
+            <label for="signupPassword" class="block text-sm font-medium mb-1">Password</label>
+            <input id="signupPassword" name="signupPassword" type="password" class="w-full border rounded-md px-3 py-2" placeholder="Choose a password" required>
+          </div>
+          <div class="flex gap-3">
+            <button id="signupSubmit" type="submit" class="bg-brand text-white px-4 py-2 rounded-md">Sign Up</button>
+            <button id="toLoginFromSignup" type="button" class="bg-gray-100 px-4 py-2 rounded-md">Back to Login</button>
+          </div>
+          <p id="signupMsg" class="text-sm text-brand"></p>
+          <p class="text-xs text-gray-400">Don't have an account? <a href="#" class="underline">Create now</a>.</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- LOGGED IN: Dashboard -->
+    <div id="dashboardWrap" class="hidden max-w-5xl mx-auto">
+
+      <!-- Welcome banner -->
+      <div class="bg-gradient-to-r from-brand to-red-500 text-white rounded-2xl p-6 md:p-8 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div id="profilePic" class="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold">A</div>
+          <div>
+            <h1 id="greeting" class="text-2xl font-extrabold">Welcome back!</h1>
+            <p class="opacity-90 text-sm">You're logged in — you can now shop and check out.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <a href="product.html" class="bg-white text-brand font-semibold px-5 py-2.5 rounded-lg hover:bg-gray-100 transition">Start Shopping →</a>
+          <button id="logoutBtn" class="border border-white text-white px-5 py-2.5 rounded-lg hover:bg-white/10 transition">Logout</button>
+        </div>
+      </div>
+
+      <!-- Panel -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+        <nav class="flex flex-wrap gap-3 mb-6 border-b pb-4">
+          <button class="tabBtn px-4 py-2 rounded-md font-medium bg-red-50 text-brand" data-tab="profile">Profile</button>
+          <button class="tabBtn px-4 py-2 rounded-md font-medium" data-tab="orders">Purchase History</button>
+          <button class="tabBtn px-4 py-2 rounded-md font-medium" data-tab="wishlist">Wishlist</button>
+          <button class="tabBtn px-4 py-2 rounded-md font-medium" data-tab="settings">Settings</button>
+        </nav>
+
+        <!-- PROFILE -->
+        <div id="profileTab">
+          <div class="space-y-4 max-w-md">
+            <div>
+              <h3 id="profileName" class="text-lg font-semibold">Your name</h3>
+              <p id="profileEmail" class="text-sm text-gray-600">email@example.com</p>
+              <p id="profilePhone" class="text-sm text-gray-700 mt-1"></p>
+            </div>
+            <button id="editProfileBtn" class="bg-brand text-white px-4 py-2 rounded-md">Edit Profile</button>
+          </div>
+        </div>
+
+        <!-- ORDERS / PURCHASE HISTORY -->
+        <div id="ordersTab" class="hidden">
+          <div id="ordersList" class="space-y-4"></div>
+        </div>
+
+        <!-- WISHLIST -->
+        <div id="wishlistTab" class="hidden">
+          <div id="wishlistList" class="space-y-3"></div>
+        </div>
+
+        <!-- SETTINGS -->
+        <div id="settingsTab" class="hidden max-w-md">
+          <h3 class="font-semibold mb-3">Account Settings</h3>
+          <div class="space-y-3">
+            <label for="newPassword" class="text-sm block">Change Password</label>
+            <input id="newPassword" name="newPassword" type="password" class="w-full border rounded-md px-3 py-2" placeholder="New password">
+            <button id="changePassBtn" class="bg-brand text-white px-4 py-2 rounded-md">Update Password</button>
+            <p id="settingsMsg" class="text-sm text-brand"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT PROFILE MODAL -->
+    <div id="editProfileModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+      <div class="bg-white rounded-lg p-6 max-w-md w-full">
+        <h4 class="text-lg font-semibold mb-3">Edit Profile</h4>
+        <div class="space-y-3">
+          <label for="editName" class="sr-only">Full name</label>
+          <input id="editName" type="text" class="w-full border rounded-md px-3 py-2" placeholder="Full name">
+          <label for="editEmail" class="sr-only">Email</label>
+          <input id="editEmail" type="email" class="w-full border rounded-md px-3 py-2" placeholder="Email">
+          <label for="editPhone" class="sr-only">Phone</label>
+          <input id="editPhone" type="tel" class="w-full border rounded-md px-3 py-2" placeholder="Phone (optional)">
+          <div class="flex justify-end gap-3 mt-2">
+            <button id="cancelEdit" class="px-4 py-2 rounded-md border">Cancel</button>
+            <button id="saveEdit" class="px-4 py-2 rounded-md bg-brand text-white">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 py-12">
+    <div class="container mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 px-6">
+      <div>
+        <h3 class="text-white font-semibold mb-3">Download Our App</h3>
+        <p>Available on Android and iOS.</p>
+        <div class="flex space-x-4 mt-4">
+          <span class="bg-gray-800 px-4 py-2 rounded-lg">Play Store</span>
+          <span class="bg-gray-800 px-4 py-2 rounded-lg">App Store</span>
+        </div>
+      </div>
+      <div class="text-center">
+        <img src="images/auralift.png" alt="Auralift logo" class="mx-auto w-16 mb-3">
+        <p>Making fitness and sports gear accessible to everyone at affordable prices.</p>
+      </div>
+      <div class="text-center">
+        <h3 class="text-white font-semibold mb-3">Useful Links</h3>
+        <ul class="space-y-1">
+          <li><a href="index.html" class="hover:text-red-500">Home</a></li>
+          <li><a href="about.html" class="hover:text-red-500">About</a></li>
+          <li><a href="product.html" class="hover:text-red-500">Products</a></li>
+          <li><a href="contact.html" class="hover:text-red-500">Contact</a></li>
+          <li><a href="account.html" class="hover:text-red-500">Account</a></li>
+        </ul>
+      </div>
+      <div class="text-center">
+        <h3 class="text-white font-semibold mb-3">Follow Us</h3>
+        <ul class="space-y-1">
+          <li><a href="#" class="hover:text-red-500">Facebook</a></li>
+          <li><a href="#" class="hover:text-red-500">Instagram</a></li>
+          <li><a href="#" class="hover:text-red-500">Twitter</a></li>
+          <li><a href="#" class="hover:text-red-500">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-gray-800 my-6">
+    <p class="text-center text-gray-500">© 2025 Auralift - All Rights Reserved</p>
+    <p class="text-center text-gray-500">Designed by Satyam Mishra & Team 💗</p>
+  </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => document.querySelectorAll(sel);
+
+   
+
+    // Elements
+    const authContainer = $('#authContainer');
+    const dashboardWrap = $('#dashboardWrap');
+    const loginForm = $('#loginForm');
+    const signupForm = $('#signupForm');
+    const toSignupFromLogin = $('#toSignupFromLogin');
+    const toLoginFromSignup = $('#toLoginFromSignup');
+    const loginMsg = $('#loginMsg');
+    const signupMsg = $('#signupMsg');
+
+    const greeting = $('#greeting');
+    const profilePic = $('#profilePic');
+    const profileName = $('#profileName');
+    const profileEmail = $('#profileEmail');
+    const profilePhone = $('#profilePhone');
+    const ordersList = $('#ordersList');
+    const wishlistList = $('#wishlistList');
+    const logoutBtn = $('#logoutBtn');
+    const tabBtns = $$('.tabBtn');
+
+    const editProfileBtn = $('#editProfileBtn');
+    const editProfileModal = $('#editProfileModal');
+    const editName = $('#editName');
+    const editEmail = $('#editEmail');
+    const editPhone = $('#editPhone');
+    const cancelEdit = $('#cancelEdit');
+    const saveEdit = $('#saveEdit');
+
+    const settingsMsg = $('#settingsMsg');
+    const changePassBtn = $('#changePassBtn');
+    const newPassword = $('#newPassword');
+
+    // Toggle login/signup forms
+    toSignupFromLogin.onclick = () => { signupForm.classList.remove('hidden'); loginForm.classList.add('hidden'); };
+    toLoginFromSignup.onclick = () => { loginForm.classList.remove('hidden'); signupForm.classList.add('hidden'); };
+
+    // Signup — new users start with empty orders (real purchase history only) and an empty wishlist
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = $('#signupName').value.trim();
+      const email = $('#signupEmail').value.trim().toLowerCase();
+      const pass = $('#signupPassword').value;
+      if (!name || !email || !pass) { signupMsg.textContent = 'All fields required.'; return; }
+
+      const users = getUsers();
+      if (users.find(u => u.email === email)) {
+        signupMsg.textContent = 'Email already registered. Try login.';
+        return;
+      }
+      const newUser = { id: 'U' + Date.now(), name, email, pass, phone: '', orders: [], wishlist: [] };
+      users.push(newUser);
+      setUsers(users);
+      setCurrentUser(newUser);
+      signupMsg.textContent = '';
+      showDashboardFor(newUser);
+    });
+
+    // Login
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = $('#loginEmail').value.trim().toLowerCase();
+      const pass = $('#loginPassword').value;
+      const users = getUsers();
+      const found = users.find(u => u.email === email && u.pass === pass);
+      if (!found) { loginMsg.textContent = 'Invalid email or password.'; return; }
+      setCurrentUser(found);
+      loginMsg.textContent = '';
+      showDashboardFor(found);
+    });
+
+    // Show dashboard after login/signup
+    function showDashboardFor(user) {
+      authContainer.classList.add('hidden');
+      dashboardWrap.classList.remove('hidden');
+      greeting.textContent = `Welcome, ${user.name.split(' ')[0]}! 👋`;
+      profileName.textContent = user.name;
+      profileEmail.textContent = user.email;
+      profilePhone.textContent = user.phone ? '📞 ' + user.phone : '';
+      profilePic.textContent = user.name[0].toUpperCase();
+      fillOrders(user.orders || []);
+      fillWishlist(user.wishlist || []);
+      openTab('profile');
+    }
+
+    // Real purchase history — populated only when the user actually checks out from product.html / index.html
+    function fillOrders(orders) {
+      ordersList.innerHTML = '';
+      if (!orders || orders.length === 0) {
+        ordersList.innerHTML = `
+          <div class="text-center py-10">
+            <p class="text-gray-500 mb-4">You haven't placed any orders yet.</p>
+            <a href="product.html" class="inline-block bg-brand text-white px-5 py-2.5 rounded-lg hover:bg-brand-dark transition font-semibold">Browse Products →</a>
+          </div>`;
+        return;
+      }
+      orders.forEach(o => {
+        const itemsSummary = o.items.map(i => `${i.name} × ${i.qty}`).join(', ');
+        const div = document.createElement('div');
+        div.className = 'border rounded-lg p-4';
+        div.innerHTML = `
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <p class="font-semibold">${o.id}</p>
+              <p class="text-sm text-gray-500">${o.date}</p>
+            </div>
+            <p class="text-brand font-bold">$${o.total.toFixed(2)}</p>
+          </div>
+          <p class="text-sm text-gray-600">${itemsSummary}</p>
+        `;
+        ordersList.appendChild(div);
+      });
+    }
+
+    function fillWishlist(list) {
+      wishlistList.innerHTML = '';
+      if (!list || list.length === 0) {
+        wishlistList.innerHTML = '<p class="text-sm text-gray-600 text-center py-6">No wishlist items yet.</p>';
+        return;
+      }
+      list.forEach(i => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center justify-between border rounded-md p-3';
+        div.innerHTML = `<div><div class="font-semibold">${i.item}</div><div class="text-sm text-gray-600">${i.price}</div></div><div><button class="bg-brand text-white px-3 py-1 rounded-md">Buy</button></div>`;
+        wishlistList.appendChild(div);
+      });
+    }
+
+    // Tabs
+    function openTab(name) {
+      ['profileTab', 'ordersTab', 'wishlistTab', 'settingsTab'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+      });
+      document.getElementById(name + 'Tab').classList.remove('hidden');
+      tabBtns.forEach(b => {
+        if (b.dataset.tab === name) { b.classList.add('bg-red-50', 'text-brand'); }
+        else { b.classList.remove('bg-red-50', 'text-brand'); }
+      });
+    }
+    tabBtns.forEach(b => b.addEventListener('click', () => openTab(b.dataset.tab)));
+
+    // Logout — also clear the active cart so a new visitor can't see the previous user's items
+    logoutBtn.addEventListener('click', () => {
+      clearCurrentUser();
+      localStorage.removeItem('auralift_cart');
+      dashboardWrap.classList.add('hidden');
+      authContainer.classList.remove('hidden');
+      loginForm.classList.remove('hidden');
+      signupForm.classList.add('hidden');
+      $('#loginEmail').value = '';
+      $('#loginPassword').value = '';
+    });
+
+    // Edit profile
+    editProfileBtn.addEventListener('click', () => {
+      const user = getCurrentUser();
+      if (!user) return;
+      editName.value = user.name;
+      editEmail.value = user.email;
+      editPhone.value = user.phone || '';
+      editProfileModal.classList.remove('hidden');
+      editProfileModal.style.display = 'flex';
+    });
+    cancelEdit.addEventListener('click', () => editProfileModal.classList.add('hidden'));
+
+    saveEdit.addEventListener('click', () => {
+      const name = editName.value.trim();
+      const email = editEmail.value.trim().toLowerCase();
+      const phone = editPhone.value.trim();
+      if (!name || !email) return alert('Name and email required');
+      const users = getUsers();
+      const cur = getCurrentUser();
+      const idx = users.findIndex(u => u.id === cur.id);
+      if (idx > -1) {
+        users[idx].name = name;
+        users[idx].email = email;
+        users[idx].phone = phone;
+        setUsers(users);
+        setCurrentUser(users[idx]);
+        greeting.textContent = `Welcome, ${name.split(' ')[0]}! 👋`;
+        profileName.textContent = name;
+        profileEmail.textContent = email;
+        profilePhone.textContent = phone ? '📞 ' + phone : '';
+        profilePic.textContent = name[0].toUpperCase();
+      }
+      editProfileModal.classList.add('hidden');
+    });
+
+    // Change password
+    changePassBtn.addEventListener('click', () => {
+      const np = newPassword.value.trim();
+      if (!np) { settingsMsg.textContent = 'Provide a new password.'; return; }
+      const cur = getCurrentUser();
+      const users = getUsers();
+      const idx = users.findIndex(u => u.id === cur.id);
+      users[idx].pass = np;
+      setUsers(users);
+      setCurrentUser(users[idx]);
+      settingsMsg.textContent = 'Password updated.';
+      setTimeout(() => settingsMsg.textContent = '', 2500);
+      newPassword.value = '';
+    });
+
+    // On load: show dashboard if already logged in, else show login form
+    window.addEventListener('load', () => {
+      const cur = getCurrentUser();
+      if (cur) {
+        showDashboardFor(cur);
+      } else {
+        authContainer.classList.remove('hidden');
+        dashboardWrap.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+        signupForm.classList.add('hidden');
+      }
+    });
+
+    document.querySelectorAll('input').forEach(i => i.addEventListener('input', () => {
+      loginMsg.textContent = '';
+      signupMsg.textContent = '';
+      settingsMsg.textContent = '';
+    }));
+  </script>
+
+</body>
+</html>

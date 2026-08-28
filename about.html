@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about Auralift's mission to make premium fitness gear accessible to everyone.">
+  <title>About Us | Auralift</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/toast.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { DEFAULT: '#DC2626', dark: '#B91C1C', light: '#FEF2F2' } },
+          fontFamily: { sans: ['Poppins', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/auralift.png" alt="Auralift logo" class="w-12 h-12">
+        <span class="text-3xl font-bold text-brand">Auralift</span>
+      </a>
+      <nav class="hidden md:flex gap-8 items-center text-gray-700 font-medium">
+        <a href="index.html" class="hover:text-brand">Home</a>
+        <a href="product.html" class="hover:text-brand">Products</a>
+        <a href="about.html" class="text-brand font-semibold">About</a>
+        <a href="contact.html" class="hover:text-brand">Contact</a>
+        <a href="account.html" class="hover:text-brand">Account</a>
+      </nav>
+      <button id="menuBtn" class="md:hidden text-2xl" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white px-6 pb-4 space-y-2 border-t">
+      <a href="index.html" class="block py-2">Home</a>
+      <a href="product.html" class="block py-2">Products</a>
+      <a href="about.html" class="block py-2 text-brand font-semibold">About</a>
+      <a href="contact.html" class="block py-2">Contact</a>
+      <a href="account.html" class="block py-2">Account</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-brand-light to-red-50 py-16 md:py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-brand mb-4">About Auralift</h1>
+      <p class="text-gray-700 max-w-2xl mx-auto text-lg">
+        Your trusted destination for premium fitness gear, sportswear, and nutrition.
+        We empower every fitness enthusiast to push beyond limits and stay motivated every day.
+      </p>
+    </div>
+  </section>
+
+  <!-- About Story Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
+
+      <div class="flex-1 h-72 md:h-80 bg-gray-200 rounded-2xl overflow-hidden">
+        <img src="images/auralift.png" alt="Auralift brand mark" class="w-full h-full object-cover">
+      </div>
+
+      <div class="flex-1">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-4">Our Story</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Founded in 2025, <strong>Auralift</strong> began with a simple mission — to make
+          world-class fitness essentials accessible to everyone. We believe that fitness
+          isn't just a goal; it's a lifestyle. From gym wear to workout supplements,
+          Auralift is your one-stop fitness partner.
+        </p>
+        <p class="text-gray-600 leading-relaxed">
+          Our products are crafted for durability, comfort, and performance. Whether you're
+          a beginner or a professional athlete, Auralift is here to support your journey.
+        </p>
+        <a href="product.html" class="inline-block mt-6 bg-brand text-white px-6 py-3 rounded-lg hover:bg-brand-dark transition">
+          Explore Our Products →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Mission & Vision Section -->
+  <section class="bg-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-10">Our Mission & Vision</h2>
+      <div class="grid md:grid-cols-2 gap-10">
+        <div class="bg-brand-light p-8 rounded-xl shadow-sm hover:shadow-md transition">
+          <h3 class="text-xl font-semibold text-brand mb-3">Our Mission</h3>
+          <p class="text-gray-600">
+            To inspire fitness enthusiasts by providing high-quality, affordable products that
+            fuel motivation and help achieve personal fitness goals.
+          </p>
+        </div>
+        <div class="bg-brand-light p-8 rounded-xl shadow-sm hover:shadow-md transition">
+          <h3 class="text-xl font-semibold text-brand mb-3">Our Vision</h3>
+          <p class="text-gray-600">
+            To become the most trusted and loved fitness brand — encouraging
+            a healthier lifestyle for everyone.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-16 bg-gradient-to-b from-brand-light to-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-12">Meet Our Team</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+
+        <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+          <div class="h-40 bg-gray-200 rounded-lg mb-4 flex items-center justify-center text-gray-500">Add Image</div>
+          <h3 class="text-xl font-semibold text-gray-800">Satyam Mishra</h3>
+          <p class="text-gray-500">Founder & CEO</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+          <div class="h-40 bg-gray-200 rounded-lg mb-4 flex items-center justify-center text-gray-500">Add Image</div>
+          <h3 class="text-xl font-semibold text-gray-800">Abhishek Patel</h3>
+          <p class="text-gray-500">Marketing Head</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+          <div class="h-40 bg-gray-200 rounded-lg mb-4 flex items-center justify-center text-gray-500">Add Image</div>
+          <h3 class="text-xl font-semibold text-gray-800">Anand Kaushal</h3>
+          <p class="text-gray-500">Fitness Consultant</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 py-12">
+    <div class="container mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 px-6">
+      <div>
+        <h3 class="text-white font-semibold mb-3">Download Our App</h3>
+        <p>Available on Android and iOS.</p>
+        <div class="flex space-x-4 mt-4">
+          <span class="bg-gray-800 px-4 py-2 rounded-lg">Play Store</span>
+          <span class="bg-gray-800 px-4 py-2 rounded-lg">App Store</span>
+        </div>
+      </div>
+      <div class="text-center">
+        <img src="images/auralift.png" alt="Auralift logo" class="mx-auto w-16 mb-3">
+        <p>Making fitness and sports gear accessible to everyone at affordable prices.</p>
+      </div>
+      <div class="text-center">
+        <h3 class="text-white font-semibold mb-3">Useful Links</h3>
+        <ul class="space-y-1">
+          <li><a href="index.html" class="hover:text-red-500">Home</a></li>
+          <li><a href="about.html" class="hover:text-red-500">About</a></li>
+          <li><a href="product.html" class="hover:text-red-500">Products</a></li>
+          <li><a href="contact.html" class="hover:text-red-500">Contact</a></li>
+          <li><a href="account.html" class="hover:text-red-500">Account</a></li>
+        </ul>
+      </div>
+      <div class="text-center">
+        <h3 class="text-white font-semibold mb-3">Follow Us</h3>
+        <ul class="space-y-1">
+          <li><a href="#" class="hover:text-red-500">Facebook</a></li>
+          <li><a href="#" class="hover:text-red-500">Instagram</a></li>
+          <li><a href="#" class="hover:text-red-500">Twitter</a></li>
+          <li><a href="#" class="hover:text-red-500">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-gray-800 my-6">
+    <p class="text-center text-gray-500">© 2025 Auralift - All Rights Reserved</p>
+    <p class="text-center text-gray-500">Designed by Satyam Mishra & Team 💗</p>
+  </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>

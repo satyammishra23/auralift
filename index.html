@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Auralift — premium gym wear, sports equipment and nutrition supplements for your fitness journey.">
+  <title>Auralift | Fitness & Sports Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/toast.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { DEFAULT: '#DC2626', dark: '#B91C1C', light: '#FEF2F2' } },
+          fontFamily: { sans: ['Poppins', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-sans bg-white text-gray-700">
+
+    <!-- Navbar -->
+  <header class="absolute top-0 left-0 right-0 z-50 bg-transparent">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/auralift.png" alt="Auralift logo" class="w-12 h-12">
+        <span class="text-3xl font-bold text-brand">Auralift</span>
+      </a>
+      <nav class="hidden md:flex gap-8 items-center text-gray-700 font-medium">
+        <a href="index.html" class="text-brand font-semibold">Home</a>
+        <a href="product.html" class="hover:text-brand">Products</a>
+        <a href="about.html" class="hover:text-brand">About</a>
+        <a href="contact.html" class="hover:text-brand">Contact</a>
+        <a href="account.html" class="hover:text-brand">Account</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <span id="userChip" class="hidden text-sm text-gray-600"></span>
+        <button id="cartBtn" class="relative p-2 hover:text-brand" aria-label="Open cart">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 1.918-4.7 2.478-7.078a1.125 1.125 0 00-1.087-1.372H5.106M7.5 14.25L5.106 5.25M7.5 14.25L6.75 12M9.75 20.25a.75.75 0 100-1.5.75.75 0 000 1.5zM18 20.25a.75.75 0 100-1.5.75.75 0 000 1.5z" />
+          </svg>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-brand text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </button>
+        <button id="menuBtn" class="md:hidden text-2xl" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white px-6 pb-4 space-y-2 border-t">
+      <a href="index.html" class="block py-2 text-brand font-semibold">Home</a>
+      <a href="product.html" class="block py-2">Products</a>
+      <a href="about.html" class="block py-2">About</a>
+      <a href="contact.html" class="block py-2">Contact</a>
+      <a href="account.html" class="block py-2">Account</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-brand-light to-white relative">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-6 pt-28 pb-16 md:pt-32 md:pb-24">
+
+      <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
+          Level Up<br>Your Fitness Journey
+        </h1>
+        <p class="text-lg md:text-xl text-gray-700 font-semibold mb-4">
+          From Gym Wear to Supplements — Everything You Need to Stay Fit & Strong!
+        </p>
+        <p class="text-base md:text-lg text-brand font-medium mb-8 italic">
+          "Train Hard. Look Sharp. Lift Beyond Limits. Live Your Best Life" 💪
+        </p>
+        <a href="product.html" class="inline-block bg-brand text-white px-8 py-4 rounded-full hover:bg-brand-dark transition text-lg font-semibold shadow-md">
+          Shop Fitness Gear →
+        </a>
+      </div>
+
+      <div class="md:w-1/2 flex justify-center">
+        <img
+          src="images/image1.png"
+          alt="Athlete lifting weights"
+          class="w-full max-w-xl object-contain"
+        >
+      </div>
+    </div>
+  </section>
+  <!-- Categories Section -->
+  <section class="py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-semibold text-gray-800">Categories</h2>
+      <div class="h-1 bg-brand w-20 mx-auto mt-2 rounded"></div>
+    </div>
+    <div class="container mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
+      <a href="product.html" class="text-center group">
+        <div class="bg-gray-100 h-64 mb-4 rounded-xl overflow-hidden">
+          <img src="images/gymwear.jpg" alt="Gym wear category" class="w-full h-full object-cover group-hover:scale-105 transition">
+        </div>
+        <h3 class="text-xl font-medium">Gym Wear</h3>
+      </a>
+      <a href="product.html" class="text-center group">
+        <div class="bg-gray-100 h-64 mb-4 rounded-xl overflow-hidden">
+          <img src="images/sports2.png" alt="Sports equipment category" class="w-full h-full object-cover group-hover:scale-105 transition">
+        </div>
+        <h3 class="text-xl font-medium">Sports Equipment</h3>
+      </a>
+      <a href="product.html" class="text-center group">
+        <div class="bg-gray-100 h-64 mb-4 rounded-xl overflow-hidden">
+          <img src="images/protein.png" alt="Nutrition and protein category" class="w-full h-full object-cover group-hover:scale-105 transition">
+        </div>
+        <h3 class="text-xl font-medium">Nutrition / Protein</h3>
+      </a>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="py-16 bg-gray-50">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-semibold text-gray-800">Featured Fitness Products</h2>
+      <div class="h-1 bg-brand w-24 mx-auto mt-2 rounded"></div>
+    </div>
+    <div class="container mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 px-6">
+
+      <div class="product-card relative bg-white p-4 rounded-lg shadow hover:-translate-y-1 transition" data-name="Adjustable Dumbbells Set" data-price="120.00">
+         <button class="wishlistBtn absolute top-3 right-3 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition text-gray-600" aria-label="Toggle wishlist">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-4.35-9.5-8.5C.5 8.5 2 4.5 6 4.5c2 0 3.5 1.5 4.5 3 1-1.5 2.5-3 4.5-3 4 0 5.5 4 3.5 8-3 4.15-9.5 8.5-9.5 8.5z"/>
+    </svg>
+  </button>
+        <div class="bg-gray-100 h-48 mb-4 rounded-lg overflow-hidden">
+          <img src="images/dumble.jpg" alt="Adjustable dumbbells set" class="w-full h-full object-cover">
+        </div>
+        <h4 class="font-medium text-lg">Adjustable Dumbbells Set</h4>
+        <p class="text-brand font-semibold mt-2">$120.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Adjustable+Dumbbells+Set&price=120.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card relative bg-white p-4 rounded-lg shadow hover:-translate-y-1 transition" data-name="Resistance Bands" data-price="45.00">
+         <button class="wishlistBtn absolute top-3 right-3 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition text-gray-600" aria-label="Toggle wishlist">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-4.35-9.5-8.5C.5 8.5 2 4.5 6 4.5c2 0 3.5 1.5 4.5 3 1-1.5 2.5-3 4.5-3 4 0 5.5 4 3.5 8-3 4.15-9.5 8.5-9.5 8.5z"/>
+    </svg>
+  </button>
+        <div class="bg-gray-100 h-48 mb-4 rounded-lg overflow-hidden">
+          <img src="images/band.png" alt="Resistance bands set" class="w-full h-full object-cover">
+        </div>
+        <h4 class="font-medium text-lg">Resistance Bands</h4>
+        <p class="text-brand font-semibold mt-2">$45.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Resistance+Bands&price=45.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card relative bg-white p-4 rounded-lg shadow hover:-translate-y-1 transition" data-name="Workout Gloves" data-price="25.00">
+         <button class="wishlistBtn absolute top-3 right-3 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition text-gray-600" aria-label="Toggle wishlist">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-4.35-9.5-8.5C.5 8.5 2 4.5 6 4.5c2 0 3.5 1.5 4.5 3 1-1.5 2.5-3 4.5-3 4 0 5.5 4 3.5 8-3 4.15-9.5 8.5-9.5 8.5z"/>
+    </svg>
+  </button>
+        <div class="bg-gray-100 h-48 mb-4 rounded-lg overflow-hidden">
+          <img src="images/gloves.jpg" alt="Padded workout gloves" class="w-full h-full object-cover">
+        </div>
+        <h4 class="font-medium text-lg">Workout Gloves</h4>
+        <p class="text-brand font-semibold mt-2">$25.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Workout+Gloves&price=25.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card relative bg-white p-4 rounded-lg shadow hover:-translate-y-1 transition" data-name="Muscle Fit Gym T-shirt" data-price="35.00">
+         <button class="wishlistBtn absolute top-3 right-3 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition text-gray-600" aria-label="Toggle wishlist">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-4.35-9.5-8.5C.5 8.5 2 4.5 6 4.5c2 0 3.5 1.5 4.5 3 1-1.5 2.5-3 4.5-3 4 0 5.5 4 3.5 8-3 4.15-9.5 8.5-9.5 8.5z"/>
+    </svg>
+  </button>
+        <div class="bg-gray-100 h-48 mb-4 rounded-lg overflow-hidden">
+          <img src="images/gallery-3.jpg" alt="Muscle fit gym t-shirt, black" class="w-full h-full object-cover">
+        </div>
+        <h4 class="font-medium text-lg">Muscle Fit Gym T-shirt</h4>
+        <p class="text-brand font-semibold mt-2">$35.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Muscle+Fit+Gym+T-shirt&price=35.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card relative bg-white p-4 rounded-lg shadow hover:-translate-y-1 transition" data-name="Compression Leggings" data-price="40.00">
+         <button class="wishlistBtn absolute top-3 right-3 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition text-gray-600" aria-label="Toggle wishlist">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-4.35-9.5-8.5C.5 8.5 2 4.5 6 4.5c2 0 3.5 1.5 4.5 3 1-1.5 2.5-3 4.5-3 4 0 5.5 4 3.5 8-3 4.15-9.5 8.5-9.5 8.5z"/>
+    </svg>
+  </button>
+        <div class="bg-gray-100 h-48 mb-4 rounded-lg overflow-hidden">
+          <img src="images/gallery-2.jpg" alt="Compression leggings, grey" class="w-full h-full object-cover">
+        </div>
+        <h4 class="font-medium text-lg">Compression Leggings</h4>
+        <p class="text-brand font-semibold mt-2">$40.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Compression+Leggings&price=40.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card relative bg-white p-4 rounded-lg shadow hover:-translate-y-1 transition" data-name="Whey Protein 1kg" data-price="55.00">
+         <button class="wishlistBtn absolute top-3 right-3 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition text-gray-600" aria-label="Toggle wishlist">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-4.35-9.5-8.5C.5 8.5 2 4.5 6 4.5c2 0 3.5 1.5 4.5 3 1-1.5 2.5-3 4.5-3 4 0 5.5 4 3.5 8-3 4.15-9.5 8.5-9.5 8.5z"/>
+    </svg>
+  </button>
+        <div class="bg-gray-100 h-48 mb-4 rounded-lg overflow-hidden">
+          <img src="images/protein.png" alt="Whey protein powder, 1kg" class="w-full h-full object-cover">
+        </div>
+        <h4 class="font-medium text-lg">Whey Protein 1kg</h4>
+        <p class="text-brand font-semibold mt-2">$55.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Whey+Protein+1kg&price=55.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card relative bg-white p-4 rounded-lg shadow hover:-translate-y-1 transition" data-name="Speed Skipping Rope" data-price="15.00">
+         <button class="wishlistBtn absolute top-3 right-3 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition text-gray-600" aria-label="Toggle wishlist">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-4.35-9.5-8.5C.5 8.5 2 4.5 6 4.5c2 0 3.5 1.5 4.5 3 1-1.5 2.5-3 4.5-3 4 0 5.5 4 3.5 8-3 4.15-9.5 8.5-9.5 8.5z"/>
+    </svg>
+  </button>
+        <div class="bg-gray-100 h-48 mb-4 rounded-lg overflow-hidden">
+          <img src="images/sports2.png" alt="Skipping rope" class="w-full h-full object-cover">
+        </div>
+        <h4 class="font-medium text-lg">Speed Skipping Rope</h4>
+        <p class="text-brand font-semibold mt-2">$15.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Speed+Skipping+Rope&price=15.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card relative bg-white p-4 rounded-lg shadow hover:-translate-y-1 transition" data-name="Gym Tank Top" data-price="30.00">
+         <button class="wishlistBtn absolute top-3 right-3 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition text-gray-600" aria-label="Toggle wishlist">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-4.35-9.5-8.5C.5 8.5 2 4.5 6 4.5c2 0 3.5 1.5 4.5 3 1-1.5 2.5-3 4.5-3 4 0 5.5 4 3.5 8-3 4.15-9.5 8.5-9.5 8.5z"/>
+    </svg>
+  </button>
+        <div class="bg-gray-100 h-48 mb-4 rounded-lg overflow-hidden">
+          <img src="images/gallery-1.jpg" alt="Muscle fit gym t-shirt, red" class="w-full h-full object-cover">
+        </div>
+        <h4 class="font-medium text-lg">Gym Tank Top</h4>
+        <p class="text-brand font-semibold mt-2">$30.00</p>
+        <div class="flex gap-2 mt-3">
+          <a href="product-detail.html?item=Gym+Tank+Top&price=30.00" class="flex-1 text-center border border-brand text-brand text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand hover:text-white transition">View</a>
+          <button class="addToCartBtn flex-1 bg-brand text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-brand-dark transition">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offer Section -->
+  <section class="bg-gradient-to-r from-white to-brand-light py-16 md:py-20">
+    <div class="container mx-auto flex flex-col md:flex-row items-center px-6 gap-10">
+      <div class="md:w-1/2">
+        <div class="bg-gray-100 h-72 md:h-80 rounded-xl overflow-hidden">
+          <img src="images/offer.png" alt="Comfortable gym wear collection" class="w-full h-full object-cover">
+        </div>
+      </div>
+      <div class="md:w-1/2 text-center md:text-left">
+        <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Exclusively Available:<br>Comfortable gym wear</h3>
+        <p class="text-gray-600 mb-6 text-lg md:text-xl">Shop our exclusive collection of gym wear for a comfortable and stylish workout experience.</p>
+        <a href="product.html" class="inline-block bg-brand text-white px-6 py-3 rounded-full hover:bg-brand-dark transition font-semibold">Buy Now →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 md:py-20 bg-gradient-to-b from-white to-brand-light">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-800">What Our Customers Say</h2>
+      <div class="h-1 bg-brand w-24 mx-auto mt-3 rounded"></div>
+    </div>
+
+    <div class="container mx-auto grid md:grid-cols-3 gap-8 px-6">
+      <div class="text-center p-8 rounded-2xl shadow-lg bg-white hover:shadow-2xl hover:-translate-y-2 transition">
+        <div class="w-24 h-24 mx-auto mb-4">
+          <img src="images/user-1.png" alt="Photo of Somya" class="rounded-full w-full h-full object-cover border-4 border-brand shadow-md">
+        </div>
+        <p class="text-gray-700 italic mb-3">"Best store for all my gym supplements!"</p>
+        <h3 class="font-semibold text-gray-900 text-lg">Somya</h3>
+      </div>
+
+      <div class="text-center p-8 rounded-2xl shadow-lg bg-white hover:shadow-2xl hover:-translate-y-2 transition">
+        <div class="w-24 h-24 mx-auto mb-4">
+          <img src="images/user-2.png" alt="Photo of Suraj" class="rounded-full w-full h-full object-cover border-4 border-brand shadow-md">
+        </div>
+        <p class="text-gray-700 italic mb-3">"Their gym wear quality is excellent!"</p>
+        <h3 class="font-semibold text-gray-900 text-lg">Suraj</h3>
+      </div>
+
+      <div class="text-center p-8 rounded-2xl shadow-lg bg-white hover:shadow-2xl hover:-translate-y-2 transition">
+        <div class="w-24 h-24 mx-auto mb-4">
+          <img src="images/user-3.png" alt="Photo of Preeti" class="rounded-full w-full h-full object-cover border-4 border-brand shadow-md">
+        </div>
+        <p class="text-gray-700 italic mb-3">"Got everything I need for my fitness journey!"</p>
+        <h3 class="font-semibold text-gray-900 text-lg">Preeti</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brands -->
+  <section class="py-16 md:py-20 bg-gray-50">
+    <h2 class="text-center text-3xl md:text-4xl font-semibold pb-12 text-black">Top Brands</h2>
+    <div class="container mx-auto grid grid-cols-2 md:grid-cols-5 gap-6 px-6">
+      <span class="p-6 bg-[#6EC1D1] text-white rounded-xl shadow-lg flex items-center justify-center py-10 font-semibold text-center select-none">MyProtein</span>
+      <span class="p-6 bg-[#6EC1D1] text-white rounded-xl shadow-lg flex items-center justify-center py-10 font-semibold text-center select-none">MuscleBlaze</span>
+      <span class="p-6 bg-[#6EC1D1] text-white rounded-xl shadow-lg flex items-center justify-center py-10 font-semibold text-center select-none">Decathlon</span>
+      <span class="p-6 bg-[#6EC1D1] text-white rounded-xl shadow-lg flex items-center justify-center py-10 font-semibold text-center select-none">HRX</span>
+      <span class="p-6 bg-[#6EC1D1] text-white rounded-xl shadow-lg flex items-center justify-center py-10 font-semibold text-center select-none">Nike</span>
+    </div>
+    <p class="text-center text-sm text-gray-400 mt-4">Brand names shown for demo purposes only — not affiliated with Auralift.</p>
+  </section>
+
+  <!-- Cart Drawer -->
+  <div id="cartOverlay" class="fixed inset-0 bg-black/50 hidden z-[60]"></div>
+  <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl translate-x-full transition-transform duration-300 z-[70] flex flex-col">
+    <div class="flex justify-between items-center p-4 border-b">
+      <h2 class="text-lg font-semibold">Your Cart</h2>
+      <button id="closeCart" class="text-2xl leading-none" aria-label="Close cart">&times;</button>
+    </div>
+    <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <p class="text-gray-500 text-sm">Your cart is empty.</p>
+    </div>
+    <div class="p-4 border-t">
+      <div class="flex justify-between font-semibold mb-3 text-lg">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button id="checkoutBtn" class="w-full bg-brand text-white py-3 rounded-lg font-semibold hover:bg-brand-dark transition">Checkout</button>
+      <p class="text-xs text-gray-400 text-center mt-2">Order is saved to your account's Purchase History — no real payment gateway yet.</p>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 py-12">
+    <div class="container mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 px-6">
+      <div>
+        <h3 class="text-white font-semibold mb-3">Download Our App</h3>
+        <p>Available on Android and iOS.</p>
+        <div class="flex space-x-4 mt-4">
+          <span class="bg-gray-800 px-4 py-2 rounded-lg">Play Store</span>
+          <span class="bg-gray-800 px-4 py-2 rounded-lg">App Store</span>
+        </div>
+      </div>
+      <div class="text-center">
+        <img src="images/auralift.png" alt="Auralift logo" class="mx-auto w-16 mb-3">
+        <p>Making fitness and sports gear accessible to everyone at affordable prices.</p>
+      </div>
+      <div class="text-center">
+        <h3 class="text-white font-semibold mb-3">Useful Links</h3>
+        <ul class="space-y-1">
+          <li><a href="index.html" class="hover:text-red-500">Home</a></li>
+          <li><a href="about.html" class="hover:text-red-500">About</a></li>
+          <li><a href="product.html" class="hover:text-red-500">Products</a></li>
+          <li><a href="contact.html" class="hover:text-red-500">Contact</a></li>
+          <li><a href="account.html" class="hover:text-red-500">Account</a></li>
+        </ul>
+      </div>
+      <div class="text-center">
+        <h3 class="text-white font-semibold mb-3">Follow Us</h3>
+        <ul class="space-y-1">
+          <li><a href="#" class="hover:text-red-500">Facebook</a></li>
+          <li><a href="#" class="hover:text-red-500">Instagram</a></li>
+          <li><a href="#" class="hover:text-red-500">Twitter</a></li>
+          <li><a href="#" class="hover:text-red-500">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-gray-800 my-6">
+    <p class="text-center text-gray-500">© 2025 Auralift - All Rights Reserved</p>
+    <p class="text-center text-gray-500">Designed by Satyam Mishra & Team 💗</p>
+  </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+    
+</script>
+</body>
+</html>
